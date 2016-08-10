@@ -37,6 +37,24 @@ describe Codifligne do
     expect(operators.first).to be_a(Codifligne::Operator)
   end
 
+  it 'should return networks on valid network request' do
+    xml = File.new(fixture_path + '/index.xml')
+    stub_request(:get, api_index_url).to_return(body: xml)
+    networks = client.networks()
+
+    expect(networks.count).to equal(125)
+    expect(networks.first).to be_a(Codifligne::Network)
+  end
+
+  it 'should return groups of lines on valid group_of_lines request' do
+    xml = File.new(fixture_path + '/index.xml')
+    stub_request(:get, api_index_url).to_return(body: xml)
+    group_of_lines = client.groups_of_lines()
+
+    expect(group_of_lines.count).to equal(1578)
+    expect(group_of_lines.first).to be_a(Codifligne::GroupOfLines)
+  end
+
   it 'should raise exception on unparseable response' do
     xml = File.new(fixture_path + '/invalid_index.xml')
     stub_request(:get, api_index_url).to_return(body: xml)
@@ -59,6 +77,7 @@ describe Codifligne do
     stub_request(:get, url).to_return(body: xml)
 
     lines = client.lines(operator_name: 'RATP')
+
     expect(lines.count).to equal(382)
     expect(lines.first).to be_a(Codifligne::Line)
   end

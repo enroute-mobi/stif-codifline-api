@@ -1,6 +1,6 @@
 module Codifligne
   class Operator
-    attr_accessor :name, :stif_id
+    attr_accessor :name, :stif_id, :xml
 
     def initialize params
       params.each do |k,v|

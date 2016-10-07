@@ -2,7 +2,7 @@ module Codifligne
   class API
     DEFAULT_TIMEOUT  = 30
     DEFAULT_FORMAT   = 'xml'
-    DEFAULT_BASE_URL = "https://codifligne.stif.info/rest/v1/lc/getlist"
+    DEFAULT_BASE_URL = "https://pprod.codifligne.stif.info/rest/v1/lc/getlist"
 
     attr_accessor :timeout, :format, :base_url
 
@@ -54,7 +54,7 @@ module Codifligne
       end
 
       parse_response(api_request(params)).tap do |doc|
-        @doc ||= doc if params.empty? 
+        @doc ||= doc if params.empty?
       end
     end
 
@@ -71,7 +71,7 @@ module Codifligne
         :created_at => 'created',
         :updated_at => 'changed'
       }
-      
+
       get_doc(params).css('lines Line').map do |line|
         params = { xml: line.to_xml }
 

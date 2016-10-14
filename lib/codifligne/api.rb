@@ -89,7 +89,9 @@ module Codifligne
         line.css('OperatorRef').each do |operator|
           params[:operator_codes] << operator.attribute('ref').to_s.split(':').last
         end
-
+        unless line.css('OperatorRef').empty?
+          params[:operator_ref] = line.css('OperatorRef').first.attribute('ref').to_s
+        end
         Codifligne::Line.new(params)
       end.to_a
     end

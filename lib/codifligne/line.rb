@@ -1,6 +1,6 @@
 module Codifligne
   class Line
-    attr_accessor :name, :short_name, :transport_mode, :operator_codes, :stif_id, :status, :accessibility, :transport_submode, :xml
+    attr_accessor :name, :short_name, :transport_mode, :operator_codes, :stif_id, :status, :accessibility, :transport_submode, :xml, :operator_ref
 
     def initialize params
       params.each do |k,v|

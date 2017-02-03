@@ -85,10 +85,17 @@ module Codifligne
         params[:accessibility]     = line.css('Key:contains("Accessibility")').first.next_element.content
         submode                    = line.css('TransportSubmode')
         params[:transport_submode] = submode.first.content.strip if submode.first
+
         params[:operator_codes]    = []
         line.css('OperatorRef').each do |operator|
           params[:operator_codes] << operator.attribute('ref').to_s.split(':').last
         end
+
+        params[:secondary_operator_ref] = []
+        line.css('additionalOperators OperatorRef').each do |operator|
+          params[:secondary_operator_ref] << operator.attribute('ref').to_s
+        end
+
         unless line.css('OperatorRef').empty?
           params[:operator_ref] = line.css('OperatorRef').first.attribute('ref').to_s
         end

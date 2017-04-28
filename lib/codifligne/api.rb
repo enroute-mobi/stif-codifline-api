@@ -95,6 +95,8 @@ module Codifligne
         line.css('additionalOperators OperatorRef').each do |operator|
           params[:secondary_operator_ref] << operator.attribute('ref').to_s
         end
+        type_of_line = line.css('TypeOfLineRef').attribute('ref').to_s
+        params[:seasonal] = type_of_line && (type_of_line.split(':').last == 'seasonal') ? true : false
 
         unless line.css('OperatorRef').empty?
           params[:operator_ref] = line.css('OperatorRef').first.attribute('ref').to_s

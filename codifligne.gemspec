@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.markdown"]
   s.required_ruby_version = '>= 2.0.0'
 
-  s.add_dependency "nokogiri", "~> 1.6"
+  s.add_dependency "nokogiri", ">=1.7.2"
 
   s.add_development_dependency "awesome_print", "~> 1.6"
   s.add_development_dependency "bundler", "~> 1.11"

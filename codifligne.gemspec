@@ -5,12 +5,12 @@ require "codifligne/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.homepage    = "https://github.com/AF83/stif-codifline-api"
+  s.homepage    = "https://github.com/af83/stif-codifline-api"
   s.name        = "codifligne"
   s.version     = Codifligne::VERSION
-  s.authors     = ["Xinhui"]
-  s.email       = ["xuwhisk@gmail.com"]
-  s.summary     = "A wrapper for STIF Codifligne API."
+  s.authors     = ["af83 Dev Team"]
+  s.email       = ["devs@af83.com"]
+  s.summary     = "A wrapper for STIF Codifligne/iLICO API."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.markdown"]

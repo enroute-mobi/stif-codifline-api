@@ -8,3 +8,4 @@ spec/test_app/tmp/
 spec/test_app/.sass-cache
 codifligne-*.gem
 *.DS_Store
+.ruby-version

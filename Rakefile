@@ -11,3 +11,12 @@ rescue LoadError
 end
 
 Bundler::GemHelper.install_tasks
+
+namespace :ci do
+  desc "Check security aspects"
+  task :check_security do
+    sh "bundle exec bundle-audit check --update"
+  end
+end
+
+task :ci => [:spec, "ci:check_security"]

@@ -16,11 +16,12 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.markdown"]
   s.required_ruby_version = '>= 2.0.0'
 
-  s.add_dependency "nokogiri", ">=1.8.2"
+  s.add_dependency "nokogiri", ">=1.8.5"
 
   s.add_development_dependency "awesome_print"
   s.add_development_dependency "bundler"
   s.add_development_dependency "rake"
   s.add_development_dependency "webmock"
   s.add_development_dependency "rspec"
+  s.add_development_dependency "bundler-audit"
 end

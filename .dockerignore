@@ -1,0 +1,11 @@
+.git
+Dockerfile*
+.DS_Store
+.gitignore
+README.md
+
+/log/*
+/tmp/*
+/vendor/bundle/*
+
+/Gemfile.lock

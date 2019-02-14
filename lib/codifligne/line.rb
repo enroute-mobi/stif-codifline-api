@@ -7,5 +7,9 @@ module Codifligne
         instance_variable_set("@#{k}", v) unless v.nil?
       end
     end
+
+    def transport_mode
+      @transport_mode&.to_s&.downcase
+    end
   end
 end

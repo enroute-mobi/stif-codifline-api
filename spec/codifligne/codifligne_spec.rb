@@ -80,6 +80,7 @@ describe Codifligne do
 
     expect(lines.count).to equal(382)
     expect(lines.first).to be_a(Codifligne::Line)
+    expect(lines.first.transport_mode).to eq 'bus'
   end
 
   it 'should retrieve lines with Operator lines method' do

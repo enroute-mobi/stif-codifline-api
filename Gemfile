@@ -14,5 +14,5 @@ gemspec
 # gem 'byebug', group: [:development, :test]
 
 group :test do
-  gem "webmock", "~> 1.22.6"
+  gem "webmock"
 end

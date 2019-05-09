@@ -1,4 +1,5 @@
 require 'codifligne/v1/api'
+require 'codifligne/v2/api'
 
 class Codifligne::API
   def self.api_version

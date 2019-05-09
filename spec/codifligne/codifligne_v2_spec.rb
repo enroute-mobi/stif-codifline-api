@@ -7,7 +7,7 @@ describe Codifligne do
 
   let(:client) { Codifligne::API.new }
   let(:api_index_url) { client.build_url() }
-  let(:operator) { Codifligne::V2::Operator.new({name: 'RATP'}) }
+  let(:operator) { Codifligne::Operator.new({name: 'RATP'}) }
 
   it 'should have a version number' do
     expect(Codifligne::VERSION).not_to be nil
@@ -42,7 +42,7 @@ describe Codifligne do
     operators = client.operators()
 
     expect(operators.count).to equal(83)
-    expect(operators.first).to be_a(Codifligne::V2::Operator)
+    expect(operators.first).to be_a(Codifligne::Operator)
   end
 
   it 'should return networks on valid network request' do
@@ -51,7 +51,7 @@ describe Codifligne do
     networks = client.networks()
 
     expect(networks.count).to equal(133)
-    expect(networks.first).to be_a(Codifligne::V2::Network)
+    expect(networks.first).to be_a(Codifligne::Network)
   end
 
   it 'should return groups of lines on valid group_of_lines request' do
@@ -76,7 +76,7 @@ describe Codifligne do
     operators = client.operators(transport_mode: 'fer')
 
     expect(operators.count).to equal(1)
-    expect(operators.first).to be_a(Codifligne::V2::Operator)
+    expect(operators.first).to be_a(Codifligne::Operator)
   end
 
   it 'should return operators on valid line request' do

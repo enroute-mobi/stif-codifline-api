@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    codifligne (0.1.0)
+    codifligne (0.1.1)
       nokogiri (>= 1.8.5)
 
 GEM

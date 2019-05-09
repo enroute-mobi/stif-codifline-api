@@ -1,7 +1,7 @@
 module Codifligne
   module V2
     class API < Codifligne::CommonAPI
-      
+
       def self.base_url
         'https://pprod.codifligne.stif.info/rest/v2/lc/getlist'
       end
@@ -67,6 +67,33 @@ module Codifligne
             params[:operator_ref] = line.css('OperatorRef').first.attribute('ref').to_s
           end
           Codifligne::V2::Line.new(params)
+        end.to_a
+      end
+
+      def parse_contact(node)
+        return {} unless node
+
+        {
+          name: node.css('ContactPerson').first&.content,
+          email: node.css('Email').first&.content,
+          phone: node.css('Phone').first&.content,
+          url: node.css('Url').first&.content,
+          more: node.css('FurtherDetails').first&.content
+        }
+      end
+
+      def operators(params = {})
+        get_doc(params).css('Operator').map do |operator|
+          default_contact = parse_contact operator.css('ContactDetails').first
+          private_contact = parse_contact operator.css('PrivateContactDetails').first
+          customer_service_contact = parse_contact operator.css('CustomerServiceContactDetails').first
+          V2::Operator.new({
+            name: operator.content.strip,
+            stif_id: operator.attribute('id').to_s.strip,
+            default_contact: default_contact,
+            private_contact: private_contact,
+            customer_service_contact: customer_service_contact,
+            xml: operator.to_xml })
         end.to_a
       end
 

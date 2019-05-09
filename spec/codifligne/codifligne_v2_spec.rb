@@ -30,7 +30,6 @@ describe Codifligne do
     expect { client.operators }.to raise_error(Codifligne::CodifligneError)
   end
 
-
   it 'should raise exception on Codifligne API response 404' do
     stub_request(:get, api_index_url).to_return(status: 404)
     expect { client.operators }.to raise_error(Codifligne::CodifligneError)
@@ -43,6 +42,26 @@ describe Codifligne do
 
     expect(operators.count).to equal(83)
     expect(operators.first).to be_a(Codifligne::Operator)
+    expect(operators.first.default_contact).to_not be_nil
+    expect(operators.first.default_contact[:name]).to eq 'John Doe'
+    expect(operators.first.default_contact[:email]).to eq 'john@doe.com'
+    expect(operators.first.default_contact[:phone]).to eq '123456'
+    expect(operators.first.default_contact[:url]).to eq 'www.john.doe'
+    expect(operators.first.default_contact[:more]).to eq 'Lorem ipsum'
+
+    expect(operators.first.private_contact).to_not be_nil
+    expect(operators.first.private_contact[:name]).to eq 'John Doe'
+    expect(operators.first.private_contact[:email]).to eq 'john@doe.com'
+    expect(operators.first.private_contact[:phone]).to eq '123456'
+    expect(operators.first.private_contact[:url]).to eq 'www.john.doe'
+    expect(operators.first.private_contact[:more]).to eq 'Lorem ipsum'
+
+    expect(operators.first.customer_service_contact).to_not be_nil
+    expect(operators.first.customer_service_contact[:name]).to be_nil
+    expect(operators.first.customer_service_contact[:email]).to be_nil
+    expect(operators.first.customer_service_contact[:phone]).to be_nil
+    expect(operators.first.customer_service_contact[:url]).to be_nil
+    expect(operators.first.customer_service_contact[:more]).to be_nil
   end
 
   it 'should return networks on valid network request' do

@@ -1,4 +1,4 @@
-module Codifligne
+module Codifligne::V1
   class Operator
     attr_accessor :name, :stif_id, :xml
 

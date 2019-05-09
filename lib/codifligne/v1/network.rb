@@ -1,4 +1,4 @@
-module Codifligne
+module Codifligne::V1
   class Network
     attr_accessor :name, :stif_id, :line_codes, :xml
 
@@ -7,6 +7,5 @@ module Codifligne
         instance_variable_set("@#{k}", v) unless v.nil?
       end
     end
-
   end
 end

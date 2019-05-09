@@ -1,4 +1,4 @@
-module Codifligne
+module Codifligne::V1
   class Line
     attr_accessor :name, :short_name, :transport_mode, :operator_codes, :stif_id, :status, :accessibility, :transport_submode, :xml, :operator_ref, :secondary_operator_ref, :seasonal
 

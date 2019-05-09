@@ -3,10 +3,14 @@ require 'spec_helper'
 describe Codifligne do
   let(:client) { Codifligne::API.new }
   let(:api_index_url) { client.build_url() }
-  let(:operator) { Codifligne::Operator.new({name: 'RATP'}) }
+  let(:operator) { Codifligne::V1::Operator.new({name: 'RATP'}) }
 
   it 'should have a version number' do
     expect(Codifligne::VERSION).not_to be nil
+  end
+
+  it 'should use v1 by default' do
+    expect(client.is_a?(Codifligne::V1::API)).to be_truthy
   end
 
   it 'should have a default timeout value' do
@@ -34,7 +38,7 @@ describe Codifligne do
     operators = client.operators()
 
     expect(operators.count).to equal(82)
-    expect(operators.first).to be_a(Codifligne::Operator)
+    expect(operators.first).to be_a(Codifligne::V1::Operator)
   end
 
   it 'should return networks on valid network request' do
@@ -43,7 +47,7 @@ describe Codifligne do
     networks = client.networks()
 
     expect(networks.count).to equal(125)
-    expect(networks.first).to be_a(Codifligne::Network)
+    expect(networks.first).to be_a(Codifligne::V1::Network)
   end
 
   it 'should return groups of lines on valid group_of_lines request' do
@@ -52,7 +56,7 @@ describe Codifligne do
     group_of_lines = client.groups_of_lines()
 
     expect(group_of_lines.count).to equal(1578)
-    expect(group_of_lines.first).to be_a(Codifligne::GroupOfLines)
+    expect(group_of_lines.first).to be_a(Codifligne::V1::GroupOfLines)
   end
 
   it 'should raise exception on unparseable response' do
@@ -68,7 +72,7 @@ describe Codifligne do
     operators = client.operators(transport_mode: 'fer')
 
     expect(operators.count).to equal(3)
-    expect(operators.first).to be_a(Codifligne::Operator)
+    expect(operators.first).to be_a(Codifligne::V1::Operator)
   end
 
   it 'should return operators on valid line request' do
@@ -79,7 +83,7 @@ describe Codifligne do
     lines = client.lines(operator_name: 'RATP')
 
     expect(lines.count).to equal(382)
-    expect(lines.first).to be_a(Codifligne::Line)
+    expect(lines.first).to be_a(Codifligne::V1::Line)
     expect(lines.first.transport_mode).to eq 'bus'
   end
 

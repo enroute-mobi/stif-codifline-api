@@ -82,11 +82,28 @@ module Codifligne
         }
       end
 
+      def parse_address(node)
+        return {} unless node
+
+        {
+          house_number: node.css('HouseNumber').first&.content,
+          address_line_1: node.css('AddressLine1').first&.content,
+          address_line_2: node.css('AddressLine2').first&.content,
+          street: node.css('Street').first&.content,
+          town: node.css('Town').first&.content,
+          postcode: node.css('PostCode').first&.content,
+          postcode_extension: node.css('PostCodeExtension').first&.content
+        }
+      end
+
       def operators(params = {})
         get_doc(params).css('Operator').map do |operator|
           default_contact = parse_contact operator.css('ContactDetails').first
           private_contact = parse_contact operator.css('PrivateContactDetails').first
           customer_service_contact = parse_contact operator.css('CustomerServiceContactDetails').first
+
+          address = parse_address operator.css('Address').first
+
           V2::Operator.new({
             name: operator.content.strip,
             stif_id: operator.attribute('id').to_s.strip,

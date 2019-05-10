@@ -105,7 +105,7 @@ module Codifligne
           address = parse_address operator.css('Address').first
 
           V2::Operator.new({
-            name: operator.content.strip,
+            name: operator.css('Name').first.content.strip,
             stif_id: operator.attribute('id').to_s.strip,
             default_contact: default_contact,
             private_contact: private_contact,

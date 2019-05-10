@@ -110,6 +110,7 @@ module Codifligne
             default_contact: default_contact,
             private_contact: private_contact,
             customer_service_contact: customer_service_contact,
+            address: address,
             xml: operator.to_xml })
         end.to_a
       end

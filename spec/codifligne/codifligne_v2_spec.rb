@@ -42,6 +42,9 @@ describe Codifligne do
 
     expect(operators.count).to equal(83)
     expect(operators.first).to be_a(Codifligne::Operator)
+
+    expect(operators.first.address).to_not be_nil
+
     expect(operators.first.default_contact).to_not be_nil
     expect(operators.first.default_contact[:name]).to eq 'John Doe'
     expect(operators.first.default_contact[:email]).to eq 'john@doe.com'
@@ -80,6 +83,17 @@ describe Codifligne do
 
     expect(group_of_lines.count).to equal(1673)
     expect(group_of_lines.first).to be_a(Codifligne::V2::GroupOfLines)
+  end
+
+  it 'should return line_notices on valid line_notices request' do
+    xml = File.new(fixture_path + '/v2/index.xml')
+    stub_request(:get, api_index_url).to_return(body: xml)
+    line_notices = client.line_notices()
+
+    expect(line_notices.count).to equal(2253)
+    expect(line_notices.first).to be_a(Codifligne::V2::LineNotice)
+    expect(line_notices.first.name).to eq ''
+    expect(line_notices.first.text).to eq ''
   end
 
   it 'should raise exception on unparseable response' do

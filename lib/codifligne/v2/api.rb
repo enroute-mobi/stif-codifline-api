@@ -3,7 +3,7 @@ module Codifligne
     class API < Codifligne::CommonAPI
 
       def self.base_url
-        'https://pprod.codifligne.stif.info/rest/v2/lc/getlist'
+        ::Codifligne::API.base_url || 'https://pprod.codifligne.stif.info/rest/v2/lc/getlist'
       end
 
       def lines(params = {})
@@ -118,7 +118,7 @@ module Codifligne
       def line_notices(params = {})
         get_doc(params).css('Notice').map do |line_notice|
           next unless line_notice.css('TypeOfNoticeRef').first.attr('ref').strip == 'LineNotice'
-          
+
           V2::LineNotice.new({
             name: line_notice.css('Name').first.content.strip,
             text: line_notice.css('Text').first.content.strip,

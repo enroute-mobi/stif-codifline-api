@@ -10,6 +10,14 @@ class Codifligne::API
     @api_version = version
   end
 
+  def self.base_url= base_url
+    @base_url = base_url
+  end
+
+  def self.base_url
+    @base_url
+  end
+
   def self.new(*params)
     const_get("Codifligne::V#{api_version}::API").new(*params)
   end

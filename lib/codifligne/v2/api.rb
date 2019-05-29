@@ -97,13 +97,23 @@ module Codifligne
       end
 
       def operators(params = {})
+        if params.empty?
+          # depending on the params, we may miss certain attributes on the lines
+          # so we only read them from the doc on the global endpoint 
+          lines_per_operator = Hash.new { |h, k| h[k] = [] }
+          lines(params).each do |line|
+            lines_per_operator[line.operator_ref] << line
+          end
+        else
+          lines_per_operator = {}
+        end
+
         get_doc(params).css('Operator').map do |operator|
           default_contact = parse_contact operator.css('ContactDetails').first
           private_contact = parse_contact operator.css('PrivateContactDetails').first
           customer_service_contact = parse_contact operator.css('CustomerServiceContactDetails').first
 
           address = parse_address operator.css('Address').first
-
           V2::Operator.new({
             name: operator.css('Name').first.content.strip,
             stif_id: operator.attribute('id').to_s.strip,
@@ -111,6 +121,7 @@ module Codifligne
             private_contact: private_contact,
             customer_service_contact: customer_service_contact,
             address: address,
+            lines: lines_per_operator[operator.attribute('id').to_s],
             xml: operator.to_xml })
         end.to_a
       end

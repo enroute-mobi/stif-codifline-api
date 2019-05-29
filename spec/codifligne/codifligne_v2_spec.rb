@@ -141,4 +141,12 @@ describe Codifligne do
     expect(operator.lines.count).to equal(403)
   end
 
+  it 'should retrieve lines from the doc when available' do
+    xml = File.new(fixture_path + '/v2/index.xml')
+    stub_request(:get, api_index_url).to_return(body: xml)
+
+    expect(client).to receive(:api_request).once.and_call_original
+    operator = client.operators.find { |o| o.name == 'RATP' }
+    expect(operator.lines.count).to equal(403)
+  end
 end

@@ -3,8 +3,10 @@ module Codifligne
     attr_accessor :name, :stif_id, :xml
 
     def lines
-      client = Codifligne::API.new
-      client.lines(operator_name: self.name)
+      @lines ||= begin
+        client = Codifligne::API.new
+        client.lines(operator_name: self.name)
+      end
     end
   end
 end

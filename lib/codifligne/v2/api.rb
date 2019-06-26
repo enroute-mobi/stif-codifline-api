@@ -53,7 +53,7 @@ module Codifligne
 
           params[:line_notices]    = []
           line.css('NoticeAssignment NoticeRef').each do |notice|
-            params[:line_notices] << notice.attribute('ref').to_s.split(':').last
+            params[:line_notices] << notice.attribute('ref').to_s
           end
 
           params[:secondary_operator_ref] = []
@@ -99,7 +99,7 @@ module Codifligne
       def operators(params = {})
         if params.empty?
           # depending on the params, we may miss certain attributes on the lines
-          # so we only read them from the doc on the global endpoint 
+          # so we only read them from the doc on the global endpoint
           lines_per_operator = Hash.new { |h, k| h[k] = [] }
           lines(params).each do |line|
             lines_per_operator[line.operator_ref] << line

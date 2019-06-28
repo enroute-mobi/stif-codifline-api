@@ -46,7 +46,7 @@ module Codifligne
           submode                    = line.css('TransportSubmode')
           params[:transport_submode] = submode.first.content.strip if submode.first
 
-          params[:network_code] = line.css('RepresentedByGroupRef').try(:attribute, 'ref').try(:to_s)
+          params[:network_code] = line.css('RepresentedByGroupRef').try(:first).try(:attribute, 'ref').try(:to_s)
 
           params[:operator_codes]    = []
           line.css('OperatorRef').each do |operator|
